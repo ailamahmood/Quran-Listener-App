@@ -1,49 +1,63 @@
 import ReactPlayer from "react-player"
 
-const PlayerScreen = () => {
+const PlayerScreen = ({reciterDetail, chapterDetail}) => {
+  const audioLink=(reciter,number)=>{
+    return reciter+'/'+('00'+number).slice(-3)+'.mp3'
+  }
   return (
     <div className="min-vh-100 shadow-lg p-3 bg-s">
       <h1 className="fs-2 fw-bold text-center">Player</h1>
-      <hr/>
+      <hr />
+      { reciterDetail !== null && chapterDetail !== null ?  (
+
+      
 
       <ul className="list-group text-end">
         <div>
           <li className="list-group-item bg-transparent border-0 py-0 ps-0 fs-6 cursor d-flex justify-content-between">
-          <span>Reciter:</span>
-          <span className="fs-6">Abdelbari Al-Toubayti</span>
+            <span><b>Reciter:</b></span>
+            <span className="fs-6">{reciterDetail.name}</span>
           </li>
-          <hr/>
+          <hr />
 
           <li className="list-group-item bg-transparent border-0 py-0 ps-0 fs-6 cursor d-flex justify-content-between">
-          <span>Chapter in Arabic:</span>
-          <span className="fs-5">المائدة</span>
+            <span><b>Chapter in Arabic:</b></span>
+            <span className="fs-5">{chapterDetail.name_arabic}</span>
           </li>
-          <hr/>
+          <hr />
 
           <li className="list-group-item bg-transparent border-0 py-0 ps-0 fs-6 cursor d-flex justify-content-between">
-          <span>Chapter in English:</span>
-          <span className="fs-6">Al-Mā'idah</span>
+            <span><b>Chapter in English:</b></span>
+            <span className="fs-6">{chapterDetail.name_complex}</span>
           </li>
-          <hr/>
+          <hr />
 
           <li className="list-group-item bg-transparent border-0 py-0 ps-0 fs-6 cursor d-flex justify-content-between">
-          <span>Revelation Place:</span>
-          <span className="fs-6">madinah</span>
+            <span><b>Revelation Place:</b></span>
+            <span className="fs-6">{chapterDetail.revelation_place}</span>
           </li>
-          <hr/>
+          <hr />
 
           <li className="list-group-item bg-transparent border-0 py-0 ps-0 fs-6 cursor d-flex justify-content-between">
-          <span>Translated Name:</span>
-          <span className="fs-6">The Table Spread</span>
+            <span><b>Translated Name:</b></span>
+            <span className="fs-6">{chapterDetail.translated_name.name}</span>
           </li>
-          <hr/>
+          <hr />
 
           <div>
-            <ReactPlayer url="ss" controls={true} playing={true} width="100%" height="100%"/>
+            <ReactPlayer url={
+              audioLink(reciterDetail.Server,chapterDetail.id)
+            } 
+            controls={true} playing={true} width="100%" height="60px" />
           </div>
         </div>
-      </ul>
+      </ul>):(
+        <div className="text-center fs-5">
+          <span><p>Please select a reciter and a chapter.</p></span>
+        </div>
+      )}
     </div>
+    
   )
 }
 
