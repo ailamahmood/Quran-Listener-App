@@ -50,9 +50,9 @@ const PlayerScreen = ({ reciterDetail, chapterDetail, handleBookmark }) => {
                 controls={true} playing={true} width="100%" height="60px" />
             </div>
 
-          <button className="btn btn-primary mt-3" onClick={() => handleBookmark(reciterDetail, chapterDetail)}>
-            Bookmark
-          </button>
+            <button className="btn btn-primary mt-3" onClick={() => handleBookmark(reciterDetail, chapterDetail)}>
+              Bookmark
+            </button>
           </div>
 
         </ul>) : (

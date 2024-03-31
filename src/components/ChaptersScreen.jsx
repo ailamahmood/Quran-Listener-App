@@ -1,7 +1,7 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
 const ChaptersScreen = ({ chapters, chapterHandler }) => {
-  const[activeId, setActiveId] = useState('')
+  const [activeId, setActiveId] = useState('')
 
   return (
     <div className="min-vh-100 shadow-lg p-3 bg-s">
@@ -13,17 +13,15 @@ const ChaptersScreen = ({ chapters, chapterHandler }) => {
             <div key={chapter.id}>
               <li onClick={(e) => {
                 chapterHandler(chapter)
-                 setActiveId(chapter.id)
-                }}
+                setActiveId(chapter.id)
+              }}
                 className={`list-group-item bg-transparent border-0 py-0 d-flex justify-content-between fs-5 cursor 
-                ${
-                  chapter.id===activeId ? "active" :'' 
+                ${chapter.id === activeId ? "active" : ''
                   }`}
-                  >
+              >
                 <span>{chapter.id}</span>
-                <span className={`${
-                    chapter.id===activeId ? "active" :''
-                    }`}>{chapter.name_arabic}</span>{''}
+                <span className={`${chapter.id === activeId ? "active" : ''
+                  }`}>{chapter.name_arabic}</span>{''}
               </li>
               <hr />
             </div>
