@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react"
+import React, { useState, useEffect } from 'react';
+//import localStorage from 'localStorage';
+//import { useEffect, useState } from "react"
 import axios from 'axios'
 
 import RecitersScreen from './RecitersScreen'
@@ -12,6 +14,7 @@ const HomeScreen = () => {
 
   const [reciterDetail, setReciterDetail] = useState(null)
   const [chapterDetail, setChapterDetail] = useState(null)
+  const [bookmarks, setBookmarks] = useState([]); // State for bookmarks
 
   //Get all reciters with audio
   useEffect(() => {
@@ -34,27 +37,42 @@ useEffect(()=>{
   
 },[reciters])
 
-console.log(chapters)
+ // Fetch bookmarks from LocalStorage on mount
+useEffect(() => {
+  const storedBookmarks = localStorage.getItem('bookmarks');
+  if (storedBookmarks) {
+    setBookmarks(JSON.parse(storedBookmarks));
+  }
+}, []);
+
+//console.log(chapters)
   //console.log(reciters)
   const reciterHandler = (reciter) => {
-   // console.log(reciter.id)
     setReciterDetail(reciter)
   }
   const chapterHandler = (chapter) => {
-    //console.log(chapter.id)
     setChapterDetail(chapter)
   }
 
+  const handleBookmark = (reciter, chapter) => {
+    console.log('handleBookmark called!');
+    const bookmark = { reciter, chapter };
+    setBookmarks([...bookmarks, bookmark]); 
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks)); // Store in LocalStorage
+    alert('Bookmark Added!'); 
+  }
+
+
   return (
 
-    <div className="row p-5 home-body vh-100">
-      <div className="col-lg-4 col-md-4 col-sm-4 col-sm-12 col-12 scroll">
-        <RecitersScreen reciters={reciters} reciterHandler={reciterHandler} />
+    <div className="row py-3 px-5  home-body vh-100">
+      <div className="col-lg-4 scroll">
+        <RecitersScreen reciters={reciters} reciterHandler={reciterHandler} handleBookmark={handleBookmark}/>
       </div>
-      <div className="col-lg-4 col-md-4 col-sm-4 col-sm-12 col-12 scroll">
+      <div className="col-lg-4 scroll">
         <ChaptersScreen chapters={chapters && chapters.chapters} chapterHandler={chapterHandler}/>
       </div>
-      <div className="col-lg-4 col-md-4 col-sm-4 col-sm-12 col-12 scroll">
+      <div className="col-lg-4 scroll">
         <PlayerScreen reciterDetail={reciterDetail} chapterDetail={chapterDetail}/>
       </div>
     </div>

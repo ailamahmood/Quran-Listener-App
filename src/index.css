@@ -22,6 +22,7 @@ body {
 
 .bg-s span {
   color: #49243E;
+  font-weight: 500;
 }
 
 .scroll {
@@ -35,4 +36,15 @@ body {
 
 .active {
   color: white !important;
+}
+
+.btn{
+  background-color: #49243E;
+  border: none;
+}
+
+.btn:hover{
+  background-color: white;
+  color: #49243E;
+  font-weight: 600;
 }

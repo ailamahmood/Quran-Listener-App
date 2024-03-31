@@ -1,14 +1,15 @@
 import HomeScreen from './components/HomeScreen'
-/*import './App.css'*/
+import './App.css'
 
 const App=() =>{
 
   return (
 
       <div className='App'>
-        <h1 className='text-info text-center'>
-          <HomeScreen/>
+        <h1 className='heading'>
+          Quran Listener         
         </h1>
+        <HomeScreen/>
       </div>
       
   )
